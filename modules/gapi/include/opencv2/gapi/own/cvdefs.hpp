@@ -9,6 +9,7 @@
 #define OPENCV_GAPI_CV_DEFS_HPP
 
 #if defined(GAPI_STANDALONE)
+
 // Simulate OpenCV definitions taken from various
 // OpenCV interface headers if G-API is built in a
 // standalone mode.
@@ -146,6 +147,7 @@ namespace gapi { namespace own {
     using Size = cv::gapi::own::Size;
     using Point = cv::gapi::own::Point;
 } // namespace cv
+
 static inline int cvFloor( double value )
 {
     int i = (int)value;
