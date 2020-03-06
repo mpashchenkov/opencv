@@ -141,10 +141,10 @@ namespace gapi { namespace own {
     class Rect;
     class Size;
     class Point;
-}
-}
-    using Rect = cv::gapi::own::Rect;
-    using Size = cv::gapi::own::Size;
+} // namespace gapi
+} // namespace own
+    using Rect  = cv::gapi::own::Rect;
+    using Size  = cv::gapi::own::Size;
     using Point = cv::gapi::own::Point;
 } // namespace cv
 
@@ -153,6 +153,7 @@ static inline int cvFloor( double value )
     int i = (int)value;
     return i - (i > value);
 }
+
 #endif //  defined(GAPI_STANDALONE)
 
 #endif //  OPENCV_GAPI_CV_DEFS_HPP
