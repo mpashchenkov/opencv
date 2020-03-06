@@ -27,7 +27,6 @@
 #include <opencv2/gapi/streaming/source.hpp>
 
 namespace cv {
-
 class GArg;
 
 namespace detail {

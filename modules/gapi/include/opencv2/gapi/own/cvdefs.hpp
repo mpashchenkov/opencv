@@ -9,7 +9,6 @@
 #define OPENCV_GAPI_CV_DEFS_HPP
 
 #if defined(GAPI_STANDALONE)
-
 // Simulate OpenCV definitions taken from various
 // OpenCV interface headers if G-API is built in a
 // standalone mode.
@@ -137,14 +136,21 @@ enum InterpolationFlags{
     INTER_LINEAR_EXACT   = 5,
     INTER_MAX            = 7,
 };
+namespace gapi { namespace own {
+    class Rect;
+    class Size;
+    class Point;
+}
+}
+    using Rect = cv::gapi::own::Rect;
+    using Size = cv::gapi::own::Size;
+    using Point = cv::gapi::own::Point;
 } // namespace cv
-
 static inline int cvFloor( double value )
 {
     int i = (int)value;
     return i - (i > value);
 }
-
 #endif //  defined(GAPI_STANDALONE)
 
 #endif //  OPENCV_GAPI_CV_DEFS_HPP
