@@ -159,7 +159,7 @@ public:
 
      GFluidExecutable(const ade::Graph                          &g,
                       const FluidGraphInputData                 &graph_data,
-                      const std::vector<cv::Rect>                   &outputRois);
+                      const std::vector<cv::Rect>               &outputRois);
 };
 
 

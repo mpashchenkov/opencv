@@ -509,7 +509,7 @@ fluid::Buffer::Priv::Priv(int read_start, cv::Rect roi)
 void fluid::Buffer::Priv::init(const cv::GMatDesc &desc,
                                int writer_lpi,
                                int readStartPos,
-                               Rect roi)
+                               cv::Rect roi)
 {
     m_writer_lpi = writer_lpi;
     m_desc       = desc;

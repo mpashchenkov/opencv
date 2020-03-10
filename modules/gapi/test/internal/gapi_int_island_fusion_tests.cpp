@@ -391,8 +391,8 @@ TEST(IslandsFusion, DISABLED_IslandContainsDifferentBackends)
     cv::GComputation cc(cv::GIn(in[0], in[1]), cv::GOut(out));
 
     // Prepare compilation parameters manually
-    cv::GMetaArgs in_metas = {GMetaArg(cv::GMatDesc{CV_8U,1,Size(32,32)}),
-                              GMetaArg(cv::GMatDesc{CV_8U,1,Size(32,32)})};
+    cv::GMetaArgs in_metas = {GMetaArg(cv::GMatDesc{CV_8U,1,cv::Size(32,32)}),
+                              GMetaArg(cv::GMatDesc{CV_8U,1,cv::Size(32,32)})};
     const auto pkg = cv::gapi::kernels<J::Foo, S::Bar>();
 
     // Directly instantiate G-API graph compiler and run partial compilation
