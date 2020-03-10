@@ -141,8 +141,8 @@ namespace gapi { namespace own {
 class Rect;
 class Size;
 class Point;
-} // namespace gapi
 } // namespace own
+} // namespace gapi
 using Rect  = gapi::own::Rect;
 using Size  = gapi::own::Size;
 using Point = gapi::own::Point;
