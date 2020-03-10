@@ -109,7 +109,7 @@ public:
  */
 struct GFluidOutputRois
 {
-    std::vector<Rect> rois;
+    std::vector<cv::Rect> rois;
 };
 
 /**

@@ -138,14 +138,14 @@ enum InterpolationFlags{
     INTER_MAX            = 7,
 };
 namespace gapi { namespace own {
-    class Rect;
-    class Size;
-    class Point;
+class Rect;
+class Size;
+class Point;
 } // namespace gapi
 } // namespace own
-    using Rect  = cv::gapi::own::Rect;
-    using Size  = cv::gapi::own::Size;
-    using Point = cv::gapi::own::Point;
+using Rect  = gapi::own::Rect;
+using Size  = gapi::own::Size;
+using Point = gapi::own::Point;
 } // namespace cv
 
 static inline int cvFloor( double value )
