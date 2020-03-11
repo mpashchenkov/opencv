@@ -50,11 +50,6 @@ namespace own
            cv::Mat to_ocv(Mat&&)    = delete;
 
     inline cv::Scalar to_ocv(const Scalar& s) { return {s[0], s[1], s[2], s[3]}; };
-
-    inline cv::Size to_ocv (const Size& s) { return cv::Size(s.width, s.height); };
-
-    inline cv::Rect to_ocv (const Rect& r) { return cv::Rect(r.x, r.y, r.width, r.height); };
-
 } // namespace own
 } // namespace gapi
 } // namespace cv
