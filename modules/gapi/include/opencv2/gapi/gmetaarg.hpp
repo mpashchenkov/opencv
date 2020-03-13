@@ -66,13 +66,11 @@ namespace detail
 
 // Note: descr_of(std::vector<..>) returns a GArrayDesc, while
 //       descrs_of(std::vector<..>) returns an array of Meta args!
-class Mat;
 class UMat;
 GAPI_EXPORTS cv::GMetaArgs descrs_of(const std::vector<cv::Mat> &vec);
 GAPI_EXPORTS cv::GMetaArgs descrs_of(const std::vector<cv::UMat> &vec);
 namespace gapi { namespace own {
-    class Mat;
-    GAPI_EXPORTS cv::GMetaArgs descrs_of(const std::vector<Mat> &vec);
+    GAPI_EXPORTS cv::GMetaArgs descrs_of(const std::vector<cv::Mat> &vec);
 }} // namespace gapi::own
 
 } // namespace cv

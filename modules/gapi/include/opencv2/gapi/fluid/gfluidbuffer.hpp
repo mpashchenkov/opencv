@@ -27,13 +27,11 @@ namespace fluid {
 
 struct Border
 {
-#if !defined(GAPI_STANDALONE)
     // This constructor is required to support existing kernels which are part of G-API
-    Border(int _type, cv::Scalar _val) : type(_type), value(to_own(_val)) {};
-#endif // !defined(GAPI_STANDALONE)
-    Border(int _type, cv::gapi::own::Scalar _val) : type(_type), value(_val) {};
+    Border(int _type, cv::Scalar _val) : type(_type), value(_val) {};
+
     int type;
-    cv::gapi::own::Scalar value;
+    cv::Scalar value;
 };
 
 using BorderOpt = util::optional<Border>;
@@ -114,7 +112,7 @@ public:
            int wlpi,
            BorderOpt border);
     // Constructor for in/out buffers (for tests)
-    Buffer(const cv::gapi::own::Mat &data, bool is_input);
+    Buffer(const cv::Mat &data, bool is_input);
 
     inline uint8_t* OutLineB(int index = 0)
     {

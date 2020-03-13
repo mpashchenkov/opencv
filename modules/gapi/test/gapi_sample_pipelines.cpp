@@ -335,8 +335,8 @@ TEST(GAPI_Pipeline, CanUseOwnMatAsOutput)
     cv::Mat in_mat(3, 3, CV_8UC1);
     cv::Mat out_mat(3, 3, CV_8UC1);
 
-    cv::gapi::own::Mat in_own_mat(in_mat.rows, in_mat.cols, CV_8UC1, in_mat.data);
-    cv::gapi::own::Mat out_own_mat(out_mat.rows, out_mat.cols, CV_8UC1, out_mat.data);
+    cv::Mat in_own_mat(in_mat.rows, in_mat.cols, CV_8UC1, in_mat.data);
+    cv::Mat out_own_mat(out_mat.rows, out_mat.cols, CV_8UC1, out_mat.data);
 
     // FIXME add overload for apply(cv::gapi::own::Mat in, cv::gapi::own::Mat& out)
     EXPECT_NO_THROW(comp.apply({in_own_mat}, {out_own_mat}));

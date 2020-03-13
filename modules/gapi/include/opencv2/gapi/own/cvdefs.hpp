@@ -141,11 +141,14 @@ namespace gapi { namespace own {
 class Rect;
 class Size;
 class Point;
-} // namespace own
-} // namespace gapi
-using Rect  = gapi::own::Rect;
-using Size  = gapi::own::Size;
-using Point = gapi::own::Point;
+class Scalar;
+class Mat;
+}} // namespace gapi::own
+using Rect   = gapi::own::Rect;
+using Size   = gapi::own::Size;
+using Point  = gapi::own::Point;
+using Scalar = gapi::own::Scalar;
+using Mat    = gapi::own::Mat;
 } // namespace cv
 
 static inline int cvFloor( double value )

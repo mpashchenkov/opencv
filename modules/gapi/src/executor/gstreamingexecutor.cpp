@@ -108,19 +108,11 @@ void sync_data(cv::GRunArgs &results, cv::GRunArgsP &outputs)
         using T = cv::GRunArgP;
         switch (out_obj.index())
         {
-#if !defined(GAPI_STANDALONE)
         case T::index_of<cv::Mat*>():
             *cv::util::get<cv::Mat*>(out_obj) = std::move(cv::util::get<cv::Mat>(res_obj));
-            break;
+            break;       
         case T::index_of<cv::Scalar*>():
             *cv::util::get<cv::Scalar*>(out_obj) = std::move(cv::util::get<cv::Scalar>(res_obj));
-            break;
-#endif // !GAPI_STANDALONE
-        case T::index_of<own::Mat*>():
-            *cv::util::get<own::Mat*>(out_obj) = std::move(cv::util::get<own::Mat>(res_obj));
-            break;
-        case T::index_of<own::Scalar*>():
-            *cv::util::get<own::Scalar*>(out_obj) = std::move(cv::util::get<own::Scalar>(res_obj));
             break;
         case T::index_of<cv::detail::VectorRef>():
             cv::util::get<cv::detail::VectorRef>(out_obj).mov(cv::util::get<cv::detail::VectorRef>(res_obj));
@@ -415,10 +407,10 @@ void islandActorThread(std::vector<cv::gimpl::RcDesc> in_rcs,                // 
             // This way several backends (e.g. Fluid) remain OpenCV-independent.
             switch (in_arg.index()) {
             case cv::GRunArg::index_of<cv::Mat>():
-                isl_input.second = cv::GRunArg{cv::to_own(cv::util::get<cv::Mat>(in_arg))};
+                isl_input.second = cv::GRunArg{cv::util::get<cv::Mat>(in_arg)};
                 break;
             case cv::GRunArg::index_of<cv::Scalar>():
-                isl_input.second = cv::GRunArg{cv::to_own(cv::util::get<cv::Scalar>(in_arg))};
+                isl_input.second = cv::GRunArg{cv::util::get<cv::Scalar>(in_arg)};
                 break;
             default:
                 isl_input.second = in_arg;
@@ -438,13 +430,8 @@ void islandActorThread(std::vector<cv::gimpl::RcDesc> in_rcs,                // 
             auto id = ade::util::index(it);
             auto &r = ade::util::value(it);
 
-#if !defined(GAPI_STANDALONE)
             using MatType = cv::Mat;
             using SclType = cv::Scalar;
-#else
-            using MatType = cv::gapi::own::Mat;
-            using SclType = cv::gapi::own::Scalar;
-#endif // GAPI_STANDALONE
 
             switch (r.shape) {
                 // Allocate a data object based on its shape & meta, and put it into our vectors.

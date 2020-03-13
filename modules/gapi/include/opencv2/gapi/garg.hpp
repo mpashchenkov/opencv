@@ -89,14 +89,12 @@ using GArgs = std::vector<GArg>;
 // FIXME: Express as M<GProtoArg...>::type
 // FIXME: Move to a separate file!
 using GRunArg  = util::variant<
-#if !defined(GAPI_STANDALONE)
-    cv::Mat,
-    cv::Scalar,
+#if !defined(GAPI_STANDALONE)    
     cv::UMat,
 #endif // !defined(GAPI_STANDALONE)
     cv::gapi::wip::IStreamSource::Ptr,
-    cv::gapi::own::Mat,
-    cv::gapi::own::Scalar,
+    cv::Mat,
+    cv::Scalar,
     cv::detail::VectorRef,
     cv::detail::OpaqueRef
     >;
@@ -123,13 +121,11 @@ struct Data: public GRunArg
 } // namespace gapi
 
 using GRunArgP = util::variant<
-#if !defined(GAPI_STANDALONE)
+#if !defined(GAPI_STANDALONE)    
+    cv::UMat*,    
+#endif // !defined(GAPI_STANDALONE)
     cv::Mat*,
     cv::Scalar*,
-    cv::UMat*,
-#endif // !defined(GAPI_STANDALONE)
-    cv::gapi::own::Mat*,
-    cv::gapi::own::Scalar*,
     cv::detail::VectorRef,
     cv::detail::OpaqueRef
     >;

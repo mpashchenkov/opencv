@@ -212,9 +212,9 @@ void cv::gimpl::GPlaidMLExecutable::bindInArg(const RcDesc &rc, const GRunArg  &
 
         switch (arg.index())
         {
-        case GRunArg::index_of<cv::gapi::own::Mat>():
+        case GRunArg::index_of<cv::Mat>():
         {
-            auto& arg_mat = util::get<cv::gapi::own::Mat>(arg);
+            auto& arg_mat = util::get<cv::Mat>(arg);
             binder_->input(it->second).copy_from(arg_mat.data);
         }
         break;
@@ -248,9 +248,9 @@ void cv::gimpl::GPlaidMLExecutable::bindOutArg(const RcDesc &rc, const GRunArgP 
 
         switch (arg.index())
         {
-        case GRunArgP::index_of<cv::gapi::own::Mat*>():
+        case GRunArgP::index_of<cv::Mat*>():
         {
-            auto& arg_mat = *util::get<cv::gapi::own::Mat*>(arg);
+            auto& arg_mat = *util::get<cv::Mat*>(arg);
             binder_->output(it->second).copy_into(arg_mat.data);
         }
         break;

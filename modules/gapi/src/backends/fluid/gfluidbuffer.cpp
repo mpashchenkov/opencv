@@ -63,7 +63,7 @@ void fillBorderReflectRow(uint8_t* row, int length, int chan, int borderSize)
 }
 
 template<typename T>
-void fillConstBorderRow(uint8_t* row, int length, int chan, int borderSize, cv::gapi::own::Scalar borderValue)
+void fillConstBorderRow(uint8_t* row, int length, int chan, int borderSize, cv::Scalar borderValue)
 {
     GAPI_DbgAssert(chan > 0 && chan <= 4);
 
@@ -80,7 +80,7 @@ void fillConstBorderRow(uint8_t* row, int length, int chan, int borderSize, cv::
 }
 
 // Fills const border pixels in the whole mat
-void fillBorderConstant(int borderSize, cv::gapi::own::Scalar borderValue, cv::gapi::own::Mat& mat)
+void fillBorderConstant(int borderSize, cv::Scalar borderValue, cv::Mat& mat)
 {
     // cv::Scalar can contain maximum 4 chan
     GAPI_Assert(mat.channels() > 0 && mat.channels() <= 4);
@@ -168,7 +168,7 @@ const uint8_t* fluid::BorderHandlerT<BorderType>::inLineB(int log_idx, const Buf
     return data.ptr(idx);
 }
 
-fluid::BorderHandlerT<cv::BORDER_CONSTANT>::BorderHandlerT(int border_size, cv::gapi::own::Scalar border_value)
+fluid::BorderHandlerT<cv::BORDER_CONSTANT>::BorderHandlerT(int border_size, cv::Scalar border_value)
     : BorderHandler(border_size), m_border_value(border_value)
 { /* nothing */ }
 
@@ -266,7 +266,7 @@ const uint8_t* fluid::BufferStorageWithBorder::inLineB(int log_idx, int desc_hei
     }
 }
 
-static void copyWithoutBorder(const cv::gapi::own::Mat& src, int src_border_size, cv::gapi::own::Mat& dst, int dst_border_size, int startSrcLine, int startDstLine, int lpi)
+static void copyWithoutBorder(const cv::Mat& src, int src_border_size, cv::Mat& dst, int dst_border_size, int startSrcLine, int startDstLine, int lpi)
 {
     auto subSrc = src(cv::Rect{src_border_size, startSrcLine, src.cols - 2*src_border_size, lpi});
     auto subDst = dst(cv::Rect{dst_border_size, startDstLine, dst.cols - 2*dst_border_size, lpi});
@@ -362,8 +362,8 @@ std::unique_ptr<fluid::BufferStorage> createStorage(int capacity, int desc_width
 #endif
 }
 
-std::unique_ptr<BufferStorage> createStorage(const cv::gapi::own::Mat& data, cv::Rect roi);
-std::unique_ptr<BufferStorage> createStorage(const cv::gapi::own::Mat& data, cv::Rect roi)
+std::unique_ptr<BufferStorage> createStorage(const cv::Mat& data, cv::Rect roi);
+std::unique_ptr<BufferStorage> createStorage(const cv::Mat& data, cv::Rect roi)
 {
     std::unique_ptr<BufferStorageWithoutBorder> storage(new BufferStorageWithoutBorder);
     storage->attach(data, roi);
@@ -547,7 +547,7 @@ void fluid::Buffer::Priv::allocate(BorderOpt border,
     m_storage->updateOutCache(m_cache, m_write_caret, m_writer_lpi);
 }
 
-void fluid::Buffer::Priv::bindTo(const cv::gapi::own::Mat &data, bool is_input)
+void fluid::Buffer::Priv::bindTo(const cv::Mat &data, bool is_input)
 {
     // FIXME: move all these fields into a separate structure
     GAPI_Assert(m_desc == descr_of(data));
@@ -669,7 +669,7 @@ fluid::Buffer::Buffer(const cv::GMatDesc &desc,
     m_priv->allocate(border, border_size, max_line_consumption, skew);
 }
 
-fluid::Buffer::Buffer(const cv::gapi::own::Mat &data, bool is_input)
+fluid::Buffer::Buffer(const cv::Mat &data, bool is_input)
     : m_priv(new Priv())
     , m_cache(&m_priv->cache())
 {

@@ -43,16 +43,15 @@ namespace{
         cv::GMetaArgs vec_descr;
         vec_descr.reserve(vec.size());
         for(auto& mat : vec){
-            vec_descr.emplace_back(descr_of(mat));
+            vec_descr.emplace_back(cv::descr_of(mat));
         }
         return vec_descr;
     }
 }
 
-
-#if !defined(GAPI_STANDALONE)
 cv::GMatDesc cv::descr_of(const cv::Mat &mat)
 {
+#if !defined(GAPI_STANDALONE)
     const auto mat_dims = mat.size.dims();
 
     if (mat_dims == 2)
@@ -64,17 +63,18 @@ cv::GMatDesc cv::descr_of(const cv::Mat &mat)
         dims[i] = mat.size[i];
     }
     return GMatDesc{mat.depth(), std::move(dims)};
+#else
+    return (mat.dims.empty())
+        ? GMatDesc{mat.depth(), mat.channels(), {mat.cols, mat.rows}}
+        : GMatDesc{mat.depth(), mat.dims};
+#endif
 }
 
+#if !defined(GAPI_STANDALONE)
 cv::GMatDesc cv::descr_of(const cv::UMat &mat)
 {
     GAPI_Assert(mat.size.dims() == 2);
     return GMatDesc{ mat.depth(), mat.channels(),{ mat.cols, mat.rows } };
-}
-
-cv::GMetaArgs cv::descrs_of(const std::vector<cv::Mat> &vec)
-{
-    return vec_descr_of(vec);
 }
 
 cv::GMetaArgs cv::descrs_of(const std::vector<cv::UMat> &vec)
@@ -83,14 +83,12 @@ cv::GMetaArgs cv::descrs_of(const std::vector<cv::UMat> &vec)
 }
 #endif
 
-cv::GMatDesc cv::gapi::own::descr_of(const cv::gapi::own::Mat &mat)
+cv::GMetaArgs cv::descrs_of(const std::vector<cv::Mat> &vec)
 {
-    return (mat.dims.empty())
-        ? GMatDesc{mat.depth(), mat.channels(), {mat.cols, mat.rows}}
-        : GMatDesc{mat.depth(), mat.dims};
+    return vec_descr_of(vec);
 }
 
-cv::GMetaArgs cv::gapi::own::descrs_of(const std::vector<cv::gapi::own::Mat> &vec)
+cv::GMetaArgs cv::gapi::own::descrs_of(const std::vector<cv::Mat> &vec)
 {
     return vec_descr_of(vec);
 }
@@ -132,16 +130,9 @@ template<typename M> inline bool canDescribeHelper(const GMatDesc& desc, const M
 }
 } // anonymous namespace
 
-bool GMatDesc::canDescribe(const cv::gapi::own::Mat& mat) const
-{
-    return canDescribeHelper(*this, mat);
-}
-
-#if !defined(GAPI_STANDALONE)
 bool GMatDesc::canDescribe(const cv::Mat& mat) const
 {
     return canDescribeHelper(*this, mat);
 }
-#endif
 
 }// namespace cv

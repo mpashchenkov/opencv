@@ -17,7 +17,7 @@
 #include <opencv2/gapi/gcommon.hpp>
 #include <opencv2/gapi/gkernel.hpp>
 #include <opencv2/gapi/garg.hpp>
-#include <opencv2/gapi/own/convert.hpp> //to_ocv
+// #include <opencv2/gapi/own/convert.hpp> //to_ocv
 #include <opencv2/gapi/util/compiler_hints.hpp> //suppress_unused_warning
 #include <opencv2/gapi/util/util.hpp>
 
@@ -96,11 +96,11 @@ public:
     const T& inArg(int input) { return m_args.at(input).get<T>(); }
 
     // Syntax sugar
-    const cv::gapi::own::Mat&   inMat(int input);
-    cv::gapi::own::Mat&         outMatR(int output); // FIXME: Avoid cv::gapi::own::Mat m = ctx.outMatR()
+    const cv::Mat&   inMat(int input);
+    cv::Mat&         outMatR(int output); // FIXME: Avoid cv::gapi::own::Mat m = ctx.outMatR()
 
-    const cv::gapi::own::Scalar& inVal(int input);
-    cv::gapi::own::Scalar& outValR(int output); // FIXME: Avoid cv::gapi::own::Scalar s = ctx.outValR()
+    const cv::Scalar& inVal(int input);
+    cv::Scalar& outValR(int output); // FIXME: Avoid cv::gapi::own::Scalar s = ctx.outValR()
     template<typename T> std::vector<T>& outVecR(int output) // FIXME: the same issue
     {
         return outVecRef(output).wref<T>();
@@ -147,7 +147,7 @@ namespace detail
 template<class T> struct get_in;
 template<> struct get_in<cv::GMat>
 {
-    static cv::Mat    get(GCPUContext &ctx, int idx) { return to_ocv(ctx.inMat(idx)); }
+    static cv::Mat    get(GCPUContext &ctx, int idx) { return ctx.inMat(idx); }
 };
 template<> struct get_in<cv::GMatP>
 {
@@ -155,7 +155,7 @@ template<> struct get_in<cv::GMatP>
 };
 template<> struct get_in<cv::GScalar>
 {
-    static cv::Scalar get(GCPUContext &ctx, int idx) { return to_ocv(ctx.inVal(idx)); }
+    static cv::Scalar get(GCPUContext &ctx, int idx) { return ctx.inVal(idx); }
 };
 template<typename U> struct get_in<cv::GArray<U> >
 {
@@ -192,7 +192,7 @@ template<class T> struct get_in
 };
 
 struct tracked_cv_mat{
-    tracked_cv_mat(cv::gapi::own::Mat& m) : r{to_ocv(m)}, original_data{m.data} {}
+    tracked_cv_mat(cv::Mat& m) : r{m}, original_data{m.data} {}
     cv::Mat r;
     uchar* original_data;
 
@@ -210,12 +210,12 @@ struct tracked_cv_mat{
 
 struct scalar_wrapper
 {
-    scalar_wrapper(cv::gapi::own::Scalar& s) : m_s{cv::gapi::own::to_ocv(s)}, m_org_s(s) {};
+    scalar_wrapper(cv::Scalar& s) : m_s{s}, m_org_s(s) {};
     operator cv::Scalar& () { return m_s; }
-    void writeBack() const  { m_org_s = to_own(m_s); }
+    void writeBack() const  { m_org_s = m_s; }
 
     cv::Scalar m_s;
-    cv::gapi::own::Scalar& m_org_s;
+    cv::Scalar& m_org_s;
 };
 
 template<typename... Outputs>

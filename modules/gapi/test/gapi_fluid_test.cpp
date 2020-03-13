@@ -49,8 +49,11 @@ TEST(FluidBuffer, InputTest)
 {
     const cv::Size buffer_size = {8,8};
     cv::Mat in_mat = cv::Mat::eye(buffer_size, CV_8U);
-
+#if !defined(GAPI_STANDALONE)
+    cv::gapi::fluid::Buffer buffer(in_mat, true);
+#else
     cv::gapi::fluid::Buffer buffer(to_own(in_mat), true);
+#endif
     cv::gapi::fluid::View  view = buffer.mkView(0, false);
     view.priv().allocate(1, {});
     view.priv().reset(1);
@@ -75,7 +78,7 @@ TEST(FluidBuffer, CircularTest)
     const cv::Size buffer_size = {8,16};
 
     cv::gapi::fluid::Buffer buffer(cv::GMatDesc{CV_8U,1,buffer_size}, 3, 1, 0, 1,
-        util::make_optional(cv::gapi::fluid::Border{cv::BORDER_CONSTANT, cv::gapi::own::Scalar(255)}));
+        util::make_optional(cv::gapi::fluid::Border{cv::BORDER_CONSTANT, cv::Scalar(255)}));
     cv::gapi::fluid::View view = buffer.mkView(1, {});
     view.priv().reset(3);
     view.priv().allocate(3, {});
@@ -154,8 +157,11 @@ TEST(FluidBuffer, OutputTest)
 {
     const cv::Size buffer_size = {8,16};
     cv::Mat out_mat = cv::Mat(buffer_size, CV_8U);
-
+#if !defined(GAPI_STANDALONE)
+    cv::gapi::fluid::Buffer buffer(out_mat, false);
+#else
     cv::gapi::fluid::Buffer buffer(to_own(out_mat), false);
+#endif
     int num_writes = 0;
     while (num_writes < buffer_size.height)
     {

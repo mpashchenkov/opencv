@@ -35,9 +35,6 @@ namespace cv
             :  cv::gapi::own::Mat{to_own<int>(m.size), m.type(), m.data};
     };
 
-
-    inline cv::gapi::own::Scalar to_own(const cv::Scalar& s) { return {s[0], s[1], s[2], s[3]}; };
-
 namespace gapi
 {
 namespace own
@@ -48,8 +45,6 @@ namespace own
             : cv::Mat{m.dims, m.type(), m.data};
     }
            cv::Mat to_ocv(Mat&&)    = delete;
-
-    inline cv::Scalar to_ocv(const Scalar& s) { return {s[0], s[1], s[2], s[3]}; };
 } // namespace own
 } // namespace gapi
 } // namespace cv
