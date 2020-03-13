@@ -110,7 +110,7 @@ void sync_data(cv::GRunArgs &results, cv::GRunArgsP &outputs)
         {
         case T::index_of<cv::Mat*>():
             *cv::util::get<cv::Mat*>(out_obj) = std::move(cv::util::get<cv::Mat>(res_obj));
-            break;       
+            break;
         case T::index_of<cv::Scalar*>():
             *cv::util::get<cv::Scalar*>(out_obj) = std::move(cv::util::get<cv::Scalar>(res_obj));
             break;
