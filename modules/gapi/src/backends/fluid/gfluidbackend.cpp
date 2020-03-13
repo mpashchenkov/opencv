@@ -26,7 +26,6 @@
 #include <opencv2/gapi/gcommon.hpp>
 #include "logger.hpp"
 
-#include <opencv2/gapi/own/convert.hpp>
 #include <opencv2/gapi/gmat.hpp>    //for version of descr_of
 // PRIVATE STUFF!
 #include "compiler/gobjref.hpp"

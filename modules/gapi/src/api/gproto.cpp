@@ -131,7 +131,6 @@ cv::GMetaArg cv::descr_of(const cv::GRunArgP &argp)
 #if !defined(GAPI_STANDALONE)
     case GRunArgP::index_of<cv::UMat*>():              return GMetaArg(descr_of(*util::get<cv::UMat*>(argp)));
 #endif //  !defined(GAPI_STANDALONE)
-
     case GRunArgP::index_of<cv::Mat*>():               return GMetaArg(descr_of(*util::get<cv::Mat*>(argp)));
     case GRunArgP::index_of<cv::Scalar*>():            return GMetaArg(descr_of(*util::get<cv::Scalar*>(argp)));
     case GRunArgP::index_of<cv::detail::VectorRef>():  return GMetaArg(util::get<cv::detail::VectorRef>(argp).descr_of());

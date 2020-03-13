@@ -10,7 +10,7 @@
 #include <functional> // multiplies
 
 #include <opencv2/gapi/gkernel.hpp>
-#include <opencv2/gapi/own/convert.hpp>
+// #include <opencv2/gapi/own/convert.hpp>
 
 #include "api/gbackend_priv.hpp"
 #include "backends/common/gbackend.hpp"

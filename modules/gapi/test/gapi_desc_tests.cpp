@@ -73,15 +73,9 @@ TEST(GAPI_MetaDesc, VecMatDesc)
 
 TEST(GAPI_MetaDesc, VecOwnMatDesc)
 {
-#if !defined(GAPI_STANDALONE)
     std::vector<cv::Mat> vec = {
     cv::Mat(240, 320, CV_8U),
     cv::Mat(480, 640, CV_8UC3)};
-#else
-    std::vector<cv::Mat> vec = {
-    cv::Mat(240, 320, CV_8U, nullptr),
-    cv::Mat(480, 640, CV_8UC3, nullptr)};
-#endif
     const auto desc = cv::gapi::own::descrs_of(vec);
     EXPECT_EQ((GMatDesc{CV_8U, 1, {320, 240}}), get<GMatDesc>(desc[0]));
     EXPECT_EQ((GMatDesc{CV_8U, 3, {640, 480}}), get<GMatDesc>(desc[1]));
@@ -89,15 +83,9 @@ TEST(GAPI_MetaDesc, VecOwnMatDesc)
 
 TEST(GAPI_MetaDesc, AdlVecOwnMatDesc)
 {
-#if !defined(GAPI_STANDALONE)
     std::vector<cv::Mat> vec = {
     cv::Mat(240, 320, CV_8U),
     cv::Mat(480, 640, CV_8UC3)};
-#else
-    std::vector<cv::Mat> vec = {
-    cv::Mat(240, 320, CV_8U, nullptr),
-    cv::Mat(480, 640, CV_8UC3, nullptr)};
-#endif
 
     const auto desc = descrs_of(vec);
     EXPECT_EQ((GMatDesc{CV_8U, 1, {320, 240}}), get<GMatDesc>(desc[0]));
