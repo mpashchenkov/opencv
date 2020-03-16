@@ -15,8 +15,6 @@
 #include <opencv2/gapi/core.hpp>
 #include <opencv2/gapi/imgproc.hpp>
 
-#include <opencv2/gapi/own/types.hpp>
-
 #include <opencv2/gapi/fluid/gfluidbuffer.hpp>
 #include <opencv2/gapi/fluid/gfluidkernel.hpp>
 #include <opencv2/gapi/fluid/imgproc.hpp>

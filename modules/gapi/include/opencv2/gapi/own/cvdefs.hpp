@@ -9,7 +9,7 @@
 #define OPENCV_GAPI_CV_DEFS_HPP
 
 #if defined(GAPI_STANDALONE)
-#include <opencv2/gapi/own/types.hpp> // for Rect, Size, Point structures
+#include <opencv2/gapi/own/types.hpp> // cv::gapi::own:: Rect Size Point
 
 // Simulate OpenCV definitions taken from various
 // OpenCV interface headers if G-API is built in a
