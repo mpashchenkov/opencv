@@ -9,8 +9,6 @@
 
 #include <iomanip>   // hex, dec (debug)
 
-#include <opencv2/gapi/own/types.hpp>
-
 #include <opencv2/gapi/fluid/gfluidbuffer.hpp>
 #include "backends/fluid/gfluidbuffer_priv.hpp"
 #include <opencv2/gapi/opencv_includes.hpp>
