@@ -9,6 +9,7 @@
 #define OPENCV_GAPI_CV_DEFS_HPP
 
 #if defined(GAPI_STANDALONE)
+#include <opencv2/gapi/own/types.hpp> // cv::gapi::own:: Rect Size Point
 
 // Simulate OpenCV definitions taken from various
 // OpenCV interface headers if G-API is built in a
@@ -137,13 +138,9 @@ enum InterpolationFlags{
     INTER_LINEAR_EXACT   = 5,
     INTER_MAX            = 7,
 };
-namespace gapi { namespace own {
-class Rect;
-class Size;
-class Point;
+
 class Scalar;
 class Mat;
-}} // namespace gapi::own
 using Rect   = gapi::own::Rect;
 using Size   = gapi::own::Size;
 using Point  = gapi::own::Point;
