@@ -9,9 +9,10 @@
 #define OPENCV_GAPI_OWN_MAT_HPP
 
 #include <opencv2/gapi/opencv_includes.hpp>
-#include <opencv2/gapi/own/saturate.hpp>
+
 #include <opencv2/gapi/own/types.hpp>
 #include <opencv2/gapi/own/scalar.hpp>
+#include <opencv2/gapi/own/saturate.hpp>
 #include <opencv2/gapi/own/assert.hpp>
 
 #include <memory>                   //std::shared_ptr

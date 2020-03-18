@@ -205,7 +205,6 @@ GAPI_EXPORTS GMatDesc descr_of(const cv::UMat &mat);
 
 /** @} */
 GAPI_EXPORTS GMatDesc descr_of(const cv::Mat &mat);
-// FIXME: WHY??? WHY it is under different namespace?
 
 GAPI_EXPORTS std::ostream& operator<<(std::ostream& os, const cv::GMatDesc &desc);
 

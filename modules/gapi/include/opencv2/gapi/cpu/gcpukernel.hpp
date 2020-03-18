@@ -17,7 +17,6 @@
 #include <opencv2/gapi/gcommon.hpp>
 #include <opencv2/gapi/gkernel.hpp>
 #include <opencv2/gapi/garg.hpp>
-// #include <opencv2/gapi/own/convert.hpp> //to_ocv
 #include <opencv2/gapi/util/compiler_hints.hpp> //suppress_unused_warning
 #include <opencv2/gapi/util/util.hpp>
 
