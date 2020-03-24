@@ -139,7 +139,7 @@ enum InterpolationFlags{
     INTER_LINEAR_EXACT   = 5,
     INTER_MAX            = 7,
 };
-
+// replacement of cv's structures:
 namespace gapi { namespace own {
 class Mat;
 }} // namespace gapi::own

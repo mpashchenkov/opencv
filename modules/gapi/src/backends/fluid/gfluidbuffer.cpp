@@ -179,7 +179,6 @@ void fluid::BorderHandlerT<cv::BORDER_CONSTANT>::fillCompileTimeBorder(BufferSto
 {
     m_const_border.create(1, data.cols(), data.data().type());
     m_const_border = m_border_value;
-
     cv::gapi::fillBorderConstant(m_border_size, m_border_value, data.data());
 }
 
