@@ -72,7 +72,6 @@ GAPI_EXPORTS cv::GMetaArgs descrs_of(const std::vector<cv::UMat> &vec);
 namespace gapi { namespace own {
     GAPI_EXPORTS cv::GMetaArgs descrs_of(const std::vector<Mat> &vec);
 }} // namespace gapi::own
-
 } // namespace cv
 
 #endif // OPENCV_GAPI_GMETAARG_HPP

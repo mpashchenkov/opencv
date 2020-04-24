@@ -69,18 +69,18 @@ cv::GMatDesc cv::descr_of(const cv::Mat &mat)
 #endif
 }
 
-cv::GMatDesc cv::gapi::own::descr_of(const Mat &mat)
-{
-    return (mat.dims.empty())
-        ? GMatDesc{mat.depth(), mat.channels(), {mat.cols, mat.rows}}
-        : GMatDesc{mat.depth(), mat.dims};
-}
-
 #if !defined(GAPI_STANDALONE)
 cv::GMatDesc cv::descr_of(const cv::UMat &mat)
 {
     GAPI_Assert(mat.size.dims() == 2);
     return GMatDesc{ mat.depth(), mat.channels(),{ mat.cols, mat.rows } };
+}
+
+cv::GMatDesc cv::gapi::own::descr_of(const Mat &mat)
+{
+    return (mat.dims.empty())
+        ? GMatDesc{mat.depth(), mat.channels(), {mat.cols, mat.rows}}
+        : GMatDesc{mat.depth(), mat.dims};
 }
 
 cv::GMetaArgs cv::descrs_of(const std::vector<cv::UMat> &vec)
@@ -131,7 +131,7 @@ std::ostream& operator<<(std::ostream& os, const cv::GMatDesc &desc)
 namespace {
 template<typename M> inline bool canDescribeHelper(const GMatDesc& desc, const M& mat)
 {
-    const auto mat_desc = desc.planar ? cv::descr_of(mat).asPlanar(desc.chan) : cv::descr_of(mat);
+    const auto mat_desc = desc.planar ? descr_of(mat).asPlanar(desc.chan) : descr_of(mat);
     return desc == mat_desc;
 }
 } // anonymous namespace
