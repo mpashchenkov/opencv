@@ -42,7 +42,11 @@ namespace{
         cv::GMetaArgs vec_descr;
         vec_descr.reserve(vec.size());
         for(auto& mat : vec){
+#if !defined(GAPI_STANDALONE)
+            vec_descr.emplace_back(descr_of(mat));
+#else
             vec_descr.emplace_back(cv::descr_of(mat));
+#endif
         }
         return vec_descr;
     }
