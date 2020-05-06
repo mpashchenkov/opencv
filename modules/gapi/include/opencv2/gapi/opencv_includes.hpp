@@ -9,7 +9,7 @@
 #ifndef OPENCV_GAPI_OPENCV_INCLUDES_HPP
 #define OPENCV_GAPI_OPENCV_INCLUDES_HPP
 
-#if !defined(GAPI_STANDALONE)
+#if !defined(GAPI_STANDALONE) //
 #  include <opencv2/core/mat.hpp>
 #  include <opencv2/core/cvdef.h>
 #  include <opencv2/core/types.hpp>

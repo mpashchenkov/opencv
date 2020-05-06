@@ -11,13 +11,12 @@
 #if defined(GAPI_STANDALONE)
 #include <opencv2/gapi/own/types.hpp> // cv::gapi::own::Rect/Size/Point
 #include <opencv2/gapi/own/scalar.hpp> // cv::gapi::own::Scalar
-
+#include <opencv2/gapi/gmat.hpp> // call opencv_includes.hpp, that call cvdefs.hpp, that call gmat.hpp, ... 
 // Simulate OpenCV definitions taken from various
 // OpenCV interface headers if G-API is built in a
 // standalone mode.
 
 // interface.h:
-
 typedef unsigned char uchar;
 typedef          char schar;
 
@@ -139,15 +138,23 @@ enum InterpolationFlags{
     INTER_LINEAR_EXACT   = 5,
     INTER_MAX            = 7,
 };
+
+// struct GMatDesc; // another way - without include gmat.hpp
+
 // replacement of cv's structures:
 namespace gapi { namespace own {
 class Mat;
+// GMatDesc descr_of(const Mat &mat); // another way: error-> conflicts with a previous declaration in gmat.hpp 
 }} // namespace gapi::own
+
+using gapi::own::descr_of; // with include gmat.hpp it has not been declared
+
 using Rect   = gapi::own::Rect;
 using Size   = gapi::own::Size;
 using Point  = gapi::own::Point;
 using Scalar = gapi::own::Scalar;
 using Mat    = gapi::own::Mat;
+
 } // namespace cv
 
 static inline int cvFloor( double value )

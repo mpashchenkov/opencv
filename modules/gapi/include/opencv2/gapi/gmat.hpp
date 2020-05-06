@@ -209,7 +209,7 @@ static inline GMatDesc empty_gmat_desc() { return GMatDesc{-1,-1,{-1,-1}}; }
 GAPI_EXPORTS GMatDesc descr_of(const cv::UMat &mat);
 #endif // !defined(GAPI_STANDALONE)
 
-GAPI_EXPORTS GMatDesc descr_of(const cv::Mat &mat);
+GAPI_EXPORTS GMatDesc descr_of(const cv::Mat &mat); //another way: previous declaration
 /** @} */
 
 // FIXME: WHY??? WHY it is under different namespace?
